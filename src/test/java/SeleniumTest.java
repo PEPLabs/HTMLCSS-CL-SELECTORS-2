@@ -55,7 +55,7 @@ public class SeleniumTest {
 
             // 2. Find HTML file and determine serving method
             File htmlFile = findHtmlFile();
-            String htmlUrl = HtmlUrl(htmlFile);
+            String htmlUrl = determineHtmlUrl(htmlFile);
 
             // 3. Create WebDriver with appropriate configuration
             webDriver = createWebDriver(browserConfig);
@@ -303,8 +303,7 @@ public class SeleniumTest {
         }
 
         // Fallback to file URL
-        //return "file://" + htmlFile.getAbsolutePath();
-        throw new RuntimeException("Python3 required - file:// URLs unreliable in headless mode");
+        return "file://" + htmlFile.getAbsolutePath();
     }
 
     private boolean isPython3Available() {
