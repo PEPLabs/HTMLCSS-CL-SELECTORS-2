@@ -78,8 +78,14 @@ public class SeleniumTest {
             // Force full style recalculation (fixes headless file:// lazy render bug)
             ((org.openqa.selenium.JavascriptExecutor) webDriver)
                     .executeScript("void(window.getComputedStyle(document.body).color);");
-
-            System.out.println("Page loaded successfully");
+            
+            //Fix headless rendering issues...
+            Thread.sleep(2000);
+            ((JavascriptExecutor) webDriver).executeScript(
+                "document.body.style.display='none';" +
+                "document.body.offsetHeight;" + 
+                "document.body.style.display='block';"
+            );
 
             System.out.println("Page loaded successfully");
 
